@@ -138,20 +138,92 @@
 // console.log(person1);
 
 //class
-class Person {
-	constructor(fName, lName, bDate) {
-		this.fName = fName;
-		this.lName = lName;
-		this.bDate = new Date(bDate);
-	}
-	getBirthYear() {
-		return this.bDate.getFullYear();
-	}
-	getFullName() {
-		return `${this.fName} ${this.lName}`;
-	}
-}
+// class Person {
+// 	constructor(fName, lName, bDate) {
+// 		this.fName = fName;
+// 		this.lName = lName;
+// 		this.bDate = new Date(bDate);
+// 	}
+// 	getBirthYear() {
+// 		return this.bDate.getFullYear();
+// 	}
+// 	getFullName() {
+// 		return `${this.fName} ${this.lName}`;
+// 	}
+// }
 
-const person1 = new Person("Aj", "Sabuero", "02-25-04");
-const person2 = new Person("Jazzel", "Claire", "01-29-05");
-console.log(person1);
+// const person1 = new Person("Aj", "Sabuero", "02-25-04");
+// const person2 = new Person("Jazzel", "Claire", "01-29-05");
+// console.log(person1);
+
+// console.log(window);
+// alert("Error");
+
+//Single element
+//get id only
+// console.log(document.getElementById("my-form"));
+// // get id/class
+// console.log(document.querySelector("h1"));
+
+//multiple selector
+// console.log(document.querySelectorAll(".item"));
+// console.log(document.getElementsByClassName("item"));
+
+// const items = document.querySelectorAll(".item");
+// items.forEach((item) => console.log(item));
+
+// const ul = document.querySelector(".items");
+// // ul.remove();
+// // ul.lastElementChild.remove();
+// ul.firstElementChild.textContent = "First item";
+// ul.children[1].innerHTML = "<h2>Hello g</h2>";
+// ul.lastElementChild.textContent = "hi boy";
+
+// const button = document.querySelector("button");
+// button.style.background = "blue";
+
+// const button = document.querySelector("button");
+// button.addEventListener("mouseenter", (a) => {
+// 	a.preventDefault();
+// 	document.querySelector("button").style.background = "blue";
+// 	document.querySelector(".items").lastElementChild.innerHTML =
+// 		"<h1>Hello mother father</h1>";
+// });
+
+const myForm = document.querySelector("#my-form");
+const nameInput = document.querySelector("#name");
+const emailInput = document.querySelector("#email");
+const msg = document.querySelector(".msg");
+const listUser = document.querySelector("#users");
+
+myForm.addEventListener("submit", onSubmit);
+
+function onSubmit(e) {
+	e.preventDefault();
+	if (nameInput.value === "" && emailInput.value === "") {
+		msg.classList.add("error");
+		msg.innerHTML = "<h3>Fill name and email!</h3>";
+		setTimeout(() => msg.remove(), 3000);
+	} else if (nameInput.value === "") {
+		msg.classList.add("error");
+		msg.innerHTML = "<h3>Fill name!</h3>";
+		setTimeout(() => msg.remove(), 3000);
+	} else if (emailInput.value === "") {
+		msg.classList.add("error");
+		msg.innerHTML = "<h3>Fill email!</h3>";
+		setTimeout(() => msg.remove(), 3000);
+	} else {
+		msg.classList.add("success");
+		msg.innerHTML = "<h3>Submitted Succes</h3>";
+		setTimeout(() => msg.remove(), 3000);
+		const li = document.createElement("li");
+		li.appendChild(
+			document.createTextNode(`${nameInput.value}, ${emailInput.value}`),
+		);
+		listUser.appendChild(li);
+		msg.classList.add("success");
+		msg.innerHTML = "<h3>Submitted Succes</h3>";
+	}
+	nameInput.value = "";
+	emailInput.value = "";
+}

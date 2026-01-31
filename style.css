@@ -48,3 +48,26 @@ button:hover {
 h1 {
 	text-align: center;
 }
+
+li {
+	background-color: #f4f4f4;
+	margin: 10px;
+	padding: 5px;
+	text-decoration: none;
+}
+
+.error {
+	background-color: red;
+	color: white;
+	padding: 3px;
+	margin: 3px;
+	border-radius: 5px;
+}
+
+.success {
+	background-color: green;
+	color: white;
+	padding: 3px;
+	margin: 3px;
+	border-radius: 5px;
+}
