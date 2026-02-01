@@ -200,30 +200,31 @@ myForm.addEventListener("submit", onSubmit);
 
 function onSubmit(e) {
 	e.preventDefault();
-	if (nameInput.value === "" && emailInput.value === "") {
+	msg.classList.remove("error", "success");
+	msg.innerHTML = "";
+	if (nameInput.value.trim() === "" && emailInput.value.trim() === "") {
 		msg.classList.add("error");
 		msg.innerHTML = "<h3>Fill name and email!</h3>";
-		setTimeout(() => msg.remove(), 3000);
-	} else if (nameInput.value === "") {
+	} else if (nameInput.value.trim() === "") {
 		msg.classList.add("error");
 		msg.innerHTML = "<h3>Fill name!</h3>";
-		setTimeout(() => msg.remove(), 3000);
-	} else if (emailInput.value === "") {
+	} else if (emailInput.value.trim() === "") {
 		msg.classList.add("error");
 		msg.innerHTML = "<h3>Fill email!</h3>";
-		setTimeout(() => msg.remove(), 3000);
 	} else {
 		msg.classList.add("success");
 		msg.innerHTML = "<h3>Submitted Succes</h3>";
-		setTimeout(() => msg.remove(), 3000);
+
 		const li = document.createElement("li");
 		li.appendChild(
 			document.createTextNode(`${nameInput.value}, ${emailInput.value}`),
 		);
 		listUser.appendChild(li);
-		msg.classList.add("success");
-		msg.innerHTML = "<h3>Submitted Succes</h3>";
+		nameInput.value = "";
+		emailInput.value = "";
 	}
-	nameInput.value = "";
-	emailInput.value = "";
+	setTimeout(() => {
+		msg.innerHTML = "";
+		msg.classList.remove("error", "success");
+	}, 3000);
 }
