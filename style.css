@@ -45,6 +45,24 @@ button {
 button:hover {
 	background: #444;
 }
+.delete-btn {
+	background: red;
+	border: none;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-left: 10px;
+}
+.edit-btn {
+	background: gray;
+	border: none;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-left: 10px;
+}
 h1 {
 	text-align: center;
 }

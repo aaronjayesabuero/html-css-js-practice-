@@ -198,10 +198,31 @@ const listUser = document.querySelector("#users");
 
 myForm.addEventListener("submit", onSubmit);
 
+// EVENT DELEGATION (ONCE ONLY)
+listUser.addEventListener("click", function (e) {
+	if (e.target.classList.contains("delete-btn")) {
+		e.target.parentElement.remove();
+	}
+
+	if (e.target.classList.contains("edit-btn")) {
+		const li = e.target.parentElement;
+		const textNode = li.firstChild;
+		const currentText = textNode.textContent.trim();
+
+		const newText = prompt("Edit item:", currentText);
+
+		if (newText !== null && newText.trim() !== "") {
+			textNode.textContent = newText + " ";
+		}
+	}
+});
+
 function onSubmit(e) {
 	e.preventDefault();
+
 	msg.classList.remove("error", "success");
 	msg.innerHTML = "";
+
 	if (nameInput.value.trim() === "" && emailInput.value.trim() === "") {
 		msg.classList.add("error");
 		msg.innerHTML = "<h3>Fill name and email!</h3>";
@@ -213,16 +234,21 @@ function onSubmit(e) {
 		msg.innerHTML = "<h3>Fill email!</h3>";
 	} else {
 		msg.classList.add("success");
-		msg.innerHTML = "<h3>Submitted Succes</h3>";
+		msg.innerHTML = "<h3>Submitted Success</h3>";
 
 		const li = document.createElement("li");
-		li.appendChild(
-			document.createTextNode(`${nameInput.value}, ${emailInput.value}`),
-		);
+		li.innerHTML = `
+			${nameInput.value}, ${emailInput.value}
+			<button class="edit-btn">Edit</button>
+			<button class="delete-btn">Delete</button>
+		`;
+
 		listUser.appendChild(li);
+
 		nameInput.value = "";
 		emailInput.value = "";
 	}
+
 	setTimeout(() => {
 		msg.innerHTML = "";
 		msg.classList.remove("error", "success");
